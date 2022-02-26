@@ -6,7 +6,7 @@
 
 # start master
 
-/usr/bin/python master.py 
+/usr/bin/python master.py  23000
 
 
 ## Run Test from client

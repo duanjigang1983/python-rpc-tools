@@ -1,0 +1,16 @@
+
+## 1) For pyjsonrpc
+yum install python-devel
+pip install pyjsonrpc
+
+
+## 2) For jsonrpclib
+cd jsonrpclib
+python setup.py install
+
+
+## 3) For simplejson
+
+pip install simplejson
+
+

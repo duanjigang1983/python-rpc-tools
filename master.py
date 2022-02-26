@@ -6,6 +6,7 @@ import pyjsonrpc
 import jsonrpclib
 import time
 import simplejson as json
+import sys
 
 
 bs_list = []
@@ -26,19 +27,25 @@ def getbyname(name):
 def getbylocation(location):
 	res=[]
 	for func in bs_list:
-		ret = func.getbylocation(location)
-		if(len(ret) > 0):
-			res.append(ret)
+		## incase of any exception reply to client
+		try:
+			ret = func.getbylocation(location)
+			if(len(ret) > 0):
+				res.append(ret)
+		except:
+			pass
 		
 	return res
 
 def getbyyear(location, year):
 	res=[]
 	for func in bs_list:
-		ret = func.getbyyear(location, year)
-		if(len(ret) > 0):
-			res.append(ret)
-		
+		try:
+			ret = func.getbyyear(location, year)
+			if(len(ret) > 0):
+				res.append(ret)
+		except:
+			pass
 	return res
 
 
@@ -46,7 +53,8 @@ from jsonrpclib.SimpleJSONRPCServer import SimpleJSONRPCServer
 
 
 if __name__ == "__main__":
-	server = SimpleJSONRPCServer(('localhost', 23000))
+	port  = int(sys.argv[1])
+	server = SimpleJSONRPCServer(('localhost', port))
 
 	back_server=[{"addr":"localhost", "port":"23001"},{"addr":"localhost", "port":"23002"}]
 	for i in back_server:
