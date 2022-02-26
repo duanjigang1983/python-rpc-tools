@@ -27,8 +27,8 @@ def getbyname(name):
 		ret = bs_list[index_name(name)].getbyname(name)
 		if(len(ret) > 0):
 			res.append(ret)
-		except:
-			pass
+	except:
+		pass
 	return res
 
 def getbylocation(location):
