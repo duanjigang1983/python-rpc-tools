@@ -1,0 +1,25 @@
+#Start worker
+
+/usr/bin/python worker2.py 23002 data-nz.json
+/usr/bin/python worker1.py 23001  data-am.json
+
+
+# start master
+
+/usr/bin/python master.py 
+
+
+## Run Test from client
+
+/usr/bin/python client.py 23000
+URL:http://localhost:23000
+[{u'record_id': 5, u'year': 2004, u'location': u'Los Angeles', u'name': u'carrie'}]
+[{u'record_id': 9, u'year': 2006, u'location': u'Los Angeles', u'name': u'tarrie'}]
+[{u'record_id': 10, u'year': 2009, u'location': u'Miami', u'name': u'sarrie'}]
+[[{u'record_id': 7, u'year': 2009, u'location': u'Los Angeles', u'name': u'darrie'}, {u'record_id': 5, u'year': 2004, u'location': u'Los Angeles', u'name': u'carrie'}, {u'record_id': 6, u'year': 2006, u'location': u'Los Angeles', u'name': u'barrie'}], [{u'record_id': 9, u'year': 2006, u'location': u'Los Angeles', u'name': u'tarrie'}]]
+[[{u'record_id': 10, u'year': 2009, u'location': u'Miami', u'name': u'sarrie'}]]
+[[{u'record_id': 8, u'year': 2004, u'location': u'Newyork', u'name': u'larrie'}]]
+[[{u'record_id': 6, u'year': 2006, u'location': u'Los Angeles', u'name': u'barrie'}], [{u'record_id': 9, u'year': 2006, u'location': u'Los Angeles', u'name': u'tarrie'}]]
+[[{u'record_id': 10, u'year': 2009, u'location': u'Miami', u'name': u'sarrie'}]]
+[[{u'record_id': 8, u'year': 2004, u'location': u'Newyork', u'name': u'larrie'}]]
+
