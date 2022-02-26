@@ -22,7 +22,14 @@ def index_name(name):
 		return 1 # server2
 
 def getbyname(name):
-	return bs_list[index_name(name)].getbyname(name)
+	res=[]
+	try:
+		ret = bs_list[index_name(name)].getbyname(name)
+		if(len(ret) > 0):
+			res.append(ret)
+		except:
+			pass
+	return res
 
 def getbylocation(location):
 	res=[]
