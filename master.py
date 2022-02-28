@@ -28,9 +28,9 @@ def getbyname(name):
 		if(len(ret) > 0):
 			res.append(ret)
 	except TypeError:
-		print("TypeError")
+		return {"success":False, "message": "Error input"}
 	except IOError:
-		print("IOError")
+		return {"success":False, "message": "worker %s unavailable" % (bs_list[index_name(name)]['url'])}
 	return res
 
 def getbylocation(location):
