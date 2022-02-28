@@ -2,7 +2,7 @@
 
 
 #!/usr/bin/env python2.7
-import pyjsonrpc
+#import pyjsonrpc
 import jsonrpclib
 import time
 import simplejson as json
@@ -24,35 +24,42 @@ def index_name(name):
 def getbyname(name):
 	res=[]
 	try:
-		ret = bs_list[index_name(name)].getbyname(name)
+		ret = bs_list[index_name(name)]['func'].getbyname(name)
 		if(len(ret) > 0):
 			res.append(ret)
-	except:
-		pass
+	except TypeError:
+		print("TypeError")
+	except IOError:
+		print("IOError")
 	return res
 
 def getbylocation(location):
 	res=[]
-	for func in bs_list:
+	for node in bs_list:
 		## incase of any exception reply to client
 		try:
-			ret = func.getbylocation(location)
+			ret = node['func'].getbylocation(location)
 			if(len(ret) > 0):
 				res.append(ret)
-		except:
-			pass
+		except TypeError:
+			return {"success": False, "message":"Error input"}
+			#print("TypeError")
+		except IOError:
+			res.append({"success":False, "message": "worker %s unavailable" % node['url']})
 		
 	return res
 
 def getbyyear(location, year):
 	res=[]
-	for func in bs_list:
+	for node in bs_list:
 		try:
-			ret = func.getbyyear(location, year)
+			ret = node['func'].getbyyear(location, year)
 			if(len(ret) > 0):
 				res.append(ret)
-		except:
-			pass
+		except TypeError:
+			return {"success": False, "message":"Error input"}
+		except IOError:
+			res.append({"success":False, "message": "worker %s unavailable" % node['url']})
 	return res
 
 
@@ -65,8 +72,9 @@ if __name__ == "__main__":
 
 	back_server=[{"addr":"localhost", "port":"23001"},{"addr":"localhost", "port":"23002"}]
 	for i in back_server:
-		bs=jsonrpclib.Server('http://%s:%s' % (i['addr'], i['port']))
-		bs_list.append(bs)
+		url='http://%s:%s' % (i['addr'], i['port'])
+		bs=jsonrpclib.Server(url)
+		bs_list.append({"url":url, "func" : bs})
 	#server.register_function(pow)
 	#server.register_function(lambda x,y: x+y, 'add')
 	#server.register_function(lambda x,y: x*y, 'times')

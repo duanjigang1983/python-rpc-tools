@@ -1,10 +1,6 @@
 # python-rpc-tools
 demo of python json rpc
 
-2022-02-26
+2022-02-28
 
 
-clone libs from :
-https://github.com/duanjigang1983/jsonrpclib
-===>
-https://github.com/joshmarshall/jsonrpclib
